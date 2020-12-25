@@ -41,7 +41,7 @@ echo $status
 
 while [ $status -ne 0 ]
 do
-    read -p "Please try a new name for the API: " client
+    read -p "Please try a new name for the client: " client
     echo $client
     output=`heroku create $client`
     status=$?
