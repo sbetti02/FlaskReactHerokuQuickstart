@@ -6,6 +6,6 @@ from App import app
 def index():
     return "Yo!"
 
-@app.route('/api_test')
-def api_test():
+@app.route('/healthcheck')
+def healthcheck():
     return jsonify({'data': 'yes'})
