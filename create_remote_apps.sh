@@ -62,3 +62,8 @@ do
     status=$?
     echo $output
 done
+
+
+# `git remote add api https://git.heroku.com/$api.git`
+# `heroku config:set -a $api PROCFILE=api/Procfile`
+# `heroku buildpacks:add -a $api https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku-community/multi-procfile.tgz`
