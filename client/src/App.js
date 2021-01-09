@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 
 import './App.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
+
 function App() {
 
   const [apiData, setApiData] = useState();
 
   useEffect(() => {
-    let urlBase = 'http://localhost:5000';
-    let url = `${urlBase}/healthcheck`;
+    let url = `${API_URL}/healthcheck`;
     fetch(url)
       .then((res => res.json()))
       .catch(err => console.log(err))

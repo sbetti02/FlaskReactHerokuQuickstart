@@ -63,7 +63,20 @@ do
     echo $output
 done
 
+# API set up in heroku
+heroku config:set -a $api PROCFILE=api/Procfile
+heroku buildpacks:add -a $api https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku-community/multi-procfile.tgz
 
-# `git remote add api https://git.heroku.com/$api.git`
-# `heroku config:set -a $api PROCFILE=api/Procfile`
-# `heroku buildpacks:add -a $api https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku-community/multi-procfile.tgz`
+remoteName=heroku-api
+git remote add $remoteName https://git.heroku.com/$api.git
+git push $remoteName master
+
+# Client set up in heroku
+heroku config:set -a $client REACT_APP_API_BASE=https://$api.herokuapp.com
+heroku config:set -a $client APP_BASE=./client
+heroku buildpacks:add -a $client mars/create-react-app
+heroku buildpacks:add -a $client https://github.com/lstoll/heroku-buildpack-monorepo -i 1
+
+clientRemoteName=heroku-client
+git remote add $clientRemoteName https://git.heroku.com/$client.git
+git push $remoteName master
